@@ -6,6 +6,7 @@ public class MainMenuController : MonoBehaviour
 {
 
     private GameManager manager;
+    [SerializeField] private GameObject _endingSceneTransition;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -20,7 +21,7 @@ public class MainMenuController : MonoBehaviour
             // Assigner un événement onClick basé sur le nom du bouton ou son rôle
             if (button.name == "PlayButton")
             {
-                button.onClick.AddListener(LoadScene);
+                button.onClick.AddListener(callNextScene);
             }
             else if (button.name == "QuitButton")
             {
@@ -28,14 +29,21 @@ public class MainMenuController : MonoBehaviour
             }
 
             button.onClick.AddListener(CryYoo);
-            // Tu peux ajouter d'autres boutons ici si nécessaire
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space) )
+        {
+           callNextScene();
         }
     }
 
     // Cette méthode sera appelée lorsque le bouton "Jouer" est cliqué
-    public void LoadScene()
+    public void callNextScene()
     {
-        manager.EndCoroutineStarter();
+        manager.LaunchSceneWithTransi("GameScene", _endingSceneTransition);
     }
 
     // Cette méthode sera appelée lorsque le bouton "Quitter" est cliqué

@@ -20,10 +20,10 @@ public class GSGM : MonoBehaviour
 
     }
 
-        private void Start()
+    private void Start()
     {
         _startingSceneTransition.SetActive(true);
-        StartCoroutine(WaitBeforeFinishStart(5f));
+        StartCoroutine(WaitBeforeFinishStart(3f));
     }
 
     IEnumerator WaitBeforeFinishStart(float delay)
